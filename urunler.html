@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ürünler | BYATES Optik</title>
+  <meta name="description" content="BYATES Optik ürünler sayfası. Optik vida, plaket, pense, tornavida, bez, karton çanta ve diğer gözlük yedek parça ürünlerini filtreleyin ve WhatsApp üzerinden sipariş verin." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <style>
+    :root {
+      --primary: #b89567;
+      --primary-dark: #8c6b44;
+      --secondary: #0f172a;
+      --soft: #f8f6f2;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --white: #ffffff;
+      --border: rgba(15, 23, 42, 0.08);
+      --shadow: 0 18px 60px rgba(15, 23, 42, 0.10);
+      --radius: 22px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      color: var(--text);
+      background: linear-gradient(180deg, #ffffff 0%, #faf7f2 100%);
+    }
+
+    h1, h2, .display-font { font-family: 'Playfair Display', serif; }
+    a { text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .navbar-custom {
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      backdrop-filter: blur(14px);
+      background: rgba(255,255,255,.88);
+      border-bottom: 1px solid rgba(15,23,42,.06);
+    }
+
+    .navbar-brand {
+      font-weight: 800;
+      color: var(--secondary);
+    }
+
+    .navbar-brand span { color: var(--primary); }
+
+    .nav-link {
+      color: var(--secondary);
+      font-weight: 600;
+      margin: 0 8px;
+    }
+
+    .nav-link:hover,
+    .nav-link.active { color: var(--primary); }
+
+    .btn-brand {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: #fff;
+      border: 0;
+      border-radius: 14px;
+      padding: 13px 20px;
+      font-weight: 700;
+      box-shadow: 0 12px 30px rgba(184,149,103,.25);
+    }
+
+    .btn-brand:hover { color: #fff; }
+
+    .hero {
+      padding: 64px 0 34px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(184,149,103,.12);
+      color: var(--primary-dark);
+      font-weight: 700;
+      font-size: 14px;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 4.6vw, 4rem);
+      line-height: 1.06;
+      color: var(--secondary);
+      margin-bottom: 14px;
+    }
+
+    .hero p {
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 760px;
+      font-size: 1.02rem;
+    }
+
+    .hero-panel {
+      background: rgba(255,255,255,.82);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      border-radius: 28px;
+      padding: 28px;
+    }
+
+    .filter-bar-wrap {
+      margin-top: -8px;
+      margin-bottom: 34px;
+    }
+
+    .filter-bar {
+      background: rgba(255,255,255,.9);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      padding: 20px;
+    }
+
+    .search-input,
+    .filter-select {
+      width: 100%;
+      border: 1px solid rgba(15,23,42,.10);
+      border-radius: 14px;
+      padding: 14px 16px;
+      font-size: 0.98rem;
+      outline: none;
+      background: #fff;
+    }
+
+    .category-chips {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 10px;
+      max-height: 220px;
+      overflow: auto;
+      padding-right: 6px;
+    }
+
+    .category-chips::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .category-chips::-webkit-scrollbar-thumb {
+      background: rgba(184,149,103,.4);
+      border-radius: 10px;
+    }
+
+    .chip-btn {
+      border: 1px solid rgba(184,149,103,.25);
+      background: #fff;
+      color: #374151;
+      border-radius: 14px;
+      padding: 10px 12px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all .2s ease;
+      text-align: left;
+    }
+
+    .chip-btn:hover {
+      border-color: var(--primary);
+      color: var(--primary-dark);
+    }
+
+    .chip-btn.active {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: #fff;
+      border-color: transparent;
+    }
+
+    .chip-btn:hover,
+    .chip-btn.active {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: #fff;
+      border-color: transparent;
+    }
+
+    .section-title {
+      margin-bottom: 20px;
+    }
+
+    .section-title h2 {
+      color: var(--secondary);
+      font-size: clamp(1.7rem, 3vw, 2.4rem);
+      margin-bottom: 10px;
+    }
+
+    .section-title p {
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 0;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .product-card {
+      background: rgba(255,255,255,.88);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: .3s ease;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .product-card:hover {
+      transform: translateY(-6px);
+    }
+
+    .product-image {
+      position: relative;
+      background: linear-gradient(145deg, #fcfaf6, #f3ede3);
+      aspect-ratio: 1 / 1;
+      padding: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 18px;
+    }
+
+    .product-badge {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      background: rgba(15,23,42,.84);
+      color: #fff;
+      border-radius: 999px;
+      padding: 7px 12px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .product-body {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex: 1;
+    }
+
+    .product-title {
+      font-size: 1.08rem;
+      font-weight: 800;
+      color: var(--secondary);
+      margin: 0;
+      min-height: 52px;
+    }
+
+    .product-desc {
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 0.95rem;
+      min-height: 70px;
+      margin: 0;
+    }
+
+    .meta-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 8px;
+    }
+
+    .meta-list li {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 0.92rem;
+      color: var(--text);
+      border-bottom: 1px dashed rgba(15,23,42,.08);
+      padding-bottom: 8px;
+    }
+
+    .meta-list li span:first-child {
+      color: var(--muted);
+    }
+
+    .product-actions {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-top: auto;
+    }
+
+    .btn-outline-soft {
+      border: 1px solid rgba(15,23,42,.12);
+      background: #fff;
+      color: var(--secondary);
+      border-radius: 14px;
+      padding: 12px 14px;
+      font-weight: 700;
+    }
+
+    .btn-whatsapp {
+      background: #25d366;
+      color: #fff;
+      border: 0;
+      border-radius: 14px;
+      padding: 13px 14px;
+      font-weight: 800;
+    }
+
+    .btn-whatsapp:hover { color: #fff; }
+
+    .empty-state {
+      display: none;
+      text-align: center;
+      padding: 60px 24px;
+      border-radius: 24px;
+      border: 1px dashed rgba(15,23,42,.14);
+      background: rgba(255,255,255,.7);
+      color: var(--muted);
+      margin-top: 18px;
+    }
+
+    .cta-box {
+      margin-top: 56px;
+      background: linear-gradient(135deg, #b89567, #8c6b44);
+      color: #fff;
+      border-radius: 28px;
+      padding: 34px;
+      box-shadow: 0 28px 60px rgba(140,107,68,.22);
+    }
+
+    .cta-box h3 {
+      font-size: clamp(1.6rem, 3vw, 2.5rem);
+      margin-bottom: 12px;
+    }
+
+    .cta-box p {
+      color: rgba(255,255,255,.92);
+      line-height: 1.8;
+      margin-bottom: 0;
+    }
+
+    .footer {
+      background: #0b1220;
+      color: rgba(255,255,255,.78);
+      padding: 26px 0;
+      margin-top: 70px;
+    }
+
+    .footer a { color: #fff; }
+
+    .whatsapp-float {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: #25d366;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 18px 40px rgba(37,211,102,.35);
+      font-size: 28px;
+      z-index: 999;
+    }
+
+    @media (max-width: 1199px) {
+      .product-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 991px) {
+      .product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .hero { padding: 42px 0 24px; }
+    }
+
+    @media (max-width: 767px) {
+      .product-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+      .hero-badge {
+        width: 100%;
+        justify-content: flex-start;
+        font-size: 12px;
+      }
+      .hero h1 {
+        font-size: 2rem;
+      }
+      .hero-panel,
+      .filter-bar,
+      .cta-box {
+        padding: 20px;
+      }
+      .product-card {
+        border-radius: 18px;
+      }
+      .product-image {
+        aspect-ratio: 1 / 1;
+        padding: 10px;
+      }
+      .product-badge {
+        top: 10px;
+        left: 10px;
+        font-size: 11px;
+        padding: 6px 10px;
+      }
+      .product-body {
+        padding: 14px;
+        gap: 8px;
+      }
+      .product-title {
+        font-size: 0.95rem;
+        min-height: auto;
+        line-height: 1.35;
+      }
+      .product-desc,
+      .meta-list {
+        display: none;
+      }
+      .product-actions {
+        margin-top: 2px;
+      }
+      .btn-whatsapp {
+        padding: 11px 10px;
+        font-size: 0.88rem;
+        border-radius: 12px;
+      }
+      .whatsapp-float {
+        width: 56px;
+        height: 56px;
+        font-size: 24px;
+        right: 16px;
+        bottom: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-custom">
+    <div class="container py-2">
+      <a class="navbar-brand" href="index.html">BYATES <span>OPTİK</span></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="index.html">Ana Sayfa</a></li>
+          <li class="nav-item"><a class="nav-link active" href="urunler.html">Ürünler</a></li>
+          <li class="nav-item"><a class="nav-link" href="#kategoriler">Kategoriler</a></li>
+          <li class="nav-item"><a class="nav-link" href="#tum-urunler">Tüm Ürünler</a></li>
+          <li class="nav-item"><a class="nav-link" href="#iletisim">İletişim</a></li>
+        </ul>
+        <a href="#tum-urunler" class="btn btn-brand">Ürün Seç</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero">
+  </section>
+
+  <section class="filter-bar-wrap" id="kategoriler">
+    <div class="container">
+      <div class="filter-bar">
+        <div class="row g-3 align-items-center mb-3">
+          <div class="col-lg-5">
+            <input type="text" id="searchInput" class="search-input" placeholder="Ürün ara... Örn: vida, plaket, pense" />
+          </div>
+          <div class="col-lg-3">
+            <select id="sortSelect" class="filter-select">
+              <option value="default">Sıralama</option>
+              <option value="name-asc">A-Z</option>
+              <option value="name-desc">Z-A</option>
+              <option value="category">Kategoriye Göre</option>
+            </select>
+          </div>
+          <div class="col-lg-4 text-lg-end">
+            <button class="btn btn-outline-soft w-100 w-lg-auto" id="resetFilters"><i class="fa-solid fa-rotate-left me-2"></i>Filtreleri Temizle</button>
+          </div>
+        </div>
+        <div class="d-flex justify-content-between align-items-center mb-2">
+            <strong style="font-size:14px;">Kategoriler</strong>
+            <small style="color:#6b7280;">Filtrele</small>
+          </div>
+          <div class="category-chips" id="categoryChips"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="tum-urunler">
+    <div class="container">
+      <div class="section-title">
+        <h2>Ürün kataloğu</h2>
+        <p>Kategorilere göre filtreleyin ve ürünleri daha kompakt kart yapısıyla kolayca inceleyin.</p>
+      </div>
+
+      <div class="product-grid" id="productGrid"></div>
+      <div class="empty-state" id="emptyState">
+        <i class="fa-solid fa-box-open fa-2x mb-3"></i>
+        <p class="mb-0">Aradığınız kritere uygun ürün bulunamadı.</p>
+      </div>
+
+      <div class="cta-box mt-5" id="iletisim">
+        <div class="row g-4 align-items-center">
+          <div class="col-lg-8">
+            <h3>Toplu sipariş ve özel ürün talepleri için hızlı iletişim</h3>
+            <p>Listede olmayan ürünler için de bizimle WhatsApp üzerinden iletişime geçebilirsiniz. Toplu sipariş, özel ölçü ve farklı model talepleri için destek sağlanabilir.</p>
+          </div>
+          <div class="col-lg-4 text-lg-end">
+            <a href="https://wa.me/905000000000" class="btn btn-light fw-bold px-4 py-3 rounded-4"><i class="fa-brands fa-whatsapp me-2"></i>Genel İletişim</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container d-flex flex-column flex-lg-row justify-content-between align-items-center gap-3">
+      <div>© 2026 <strong>BYATES Optik</strong> — Optik yedek parça ürün kataloğu</div>
+      <div class="d-flex gap-3">
+        <a href="index.html">Ana Sayfa</a>
+        <a href="urunler.html">Ürünler</a>
+      </div>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/905000000000" class="whatsapp-float" aria-label="WhatsApp ile iletişime geç">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const whatsappNumber = '905000000000';
+
+    const products = [
+      {
+        id: 1,
+        name: 'Optik Vida Seti Mini',
+        code: 'BY-V001',
+        category: 'Vida',
+        size: 'Mini set',
+        stock: 'Stokta',
+        image: 'vida.jpg',
+        desc: 'Gözlük bakım ve tamir işlemleri için farklı ebatlarda mini vida seti.'
+      },
+      {
+        id: 2,
+        name: 'Sap Vidası Standart',
+        code: 'BY-SV002',
+        category: 'Sap Vidası',
+        size: 'Standart',
+        stock: 'Stokta',
+        image: 'kılavuz.jpg',
+        desc: 'Gözlük sap bağlantılarında kullanılan standart sap vidası.'
+      },
+      {
+        id: 3,
+        name: 'Burunluk Şeffaf Silikon',
+        code: 'BY-BN003',
+        category: 'Burunluk',
+        size: 'Şeffaf',
+        stock: 'Stokta',
+        image: 'burunluk.jpg',
+        desc: 'Konforlu kullanım için yumuşak yapılı şeffaf burunluk modeli.'
+      },
+      {
+        id: 4,
+        name: 'Plaket Silikon Yumuşak',
+        code: 'BY-PL004',
+        category: 'Plaket',
+        size: 'Yumuşak tip',
+        stock: 'Stokta',
+        image: 'silikon-plaket-damla-kucuk-silikon-plaket-4674-74-O.jpg',
+        desc: 'Farklı gözlük modellerine uyumlu yumuşak plaket seçeneği.'
+      },
+      {
+        id: 6,
+        name: 'Güneş Camı Klasik',
+        code: 'BY-GC006',
+        category: 'Güneş Camı',
+        size: 'Standart',
+        stock: 'Stokta',
+        image: 'cr39.jpg',
+        desc: 'Farklı çerçeveler için uygun klasik güneş camı seçeneği.'
+      },
+      {
+        id: 7,
+        name: 'Polarize Güneş Camı',
+        code: 'BY-PC007',
+        category: 'Polarize Cam',
+        size: 'Polarize',
+        stock: 'Stokta',
+        image: 'fumefilm.jpeg',
+        desc: 'Parlama azaltıcı özellikli polarize güneş camı.'
+      },
+      {
+        id: 8,
+        name: 'Antifar Cam',
+        code: 'BY-AF008',
+        category: 'Antifar Cam',
+        size: 'Standart',
+        stock: 'Stokta',
+        image: 'antifar-01-550x550.jpg',
+        desc: 'Gece görüşünü destekleyen antifar cam seçeneği.'
+      },
+      {
+        id: 9,
+        name: 'İçten Blue Cam',
+        code: 'BY-IB009',
+        category: 'İçten Blue Cam',
+        size: 'Blue',
+        stock: 'Stokta',
+        image: 'ictenblue.jpg',
+        desc: 'Yansımaya karşı içten blue kaplamalı cam modeli.'
+      },
+      {
+        id: 10,
+        name: 'İçten Etli Cam',
+        code: 'BY-IE010',
+        category: 'İçten Etli Cam',
+        size: 'Standart',
+        stock: 'Stokta',
+        image: 'fumefilm.jpeg',
+        desc: 'Dayanıklı yapılı içten etli cam seçeneği.'
+      },
+      {
+        id: 11,
+        name: 'Degrade Cam',
+        code: 'BY-DG011',
+        category: 'Degrade Cam',
+        size: 'Degrade',
+        stock: 'Stokta',
+        image: 'degrade.jpg',
+        desc: 'Üstten alta geçişli renk tonuna sahip degrade cam modeli.'
+      },
+      {
+        id: 12,
+        name: 'Aynalı Güneş Camı',
+        code: 'BY-AY012',
+        category: 'Aynalı Güneş Camı',
+        size: 'Aynalı',
+        stock: 'Stokta',
+        image: 'aynalı.jpg',
+        desc: 'Dış yüzeyi aynalı kaplamaya sahip güneş camı seçeneği.'
+      },
+      {
+        id: 13,
+        name: 'Polarize Klips',
+        code: 'BY-PK013',
+        category: 'Polarize Klips',
+        size: 'Standart',
+        stock: 'Stokta',
+        image: 'klips.jpg',
+        desc: 'Numaralı gözlüklere uyumlu pratik polarize klips modeli.'
+      },
+      {
+        id: 14,
+        name: 'Cam Boyama Solüsyonu',
+        code: 'BY-CB014',
+        category: 'Boyama Cam',
+        size: '500 ml',
+        stock: 'Stokta',
+        image: 'camboya.jpg',
+        desc: 'Cam boyama işlemleri için yardımcı boyama ürünü.'
+      },
+      {
+        id: 15,
+        name: 'Silme Suyu',
+        code: 'BY-SS015',
+        category: 'Silme Suyu',
+        size: '1 Litre',
+        stock: 'Stokta',
+        image: 'su.jpeg',
+        desc: 'Cam temizliği ve bakımında kullanılan silme suyu.'
+      },
+      {
+        id: 16,
+        name: 'Vantuz',
+        code: 'BY-VT016',
+        category: 'Vantuz',
+        size: 'Standart',
+        stock: 'Stokta',
+        image: 'vantuz.jpg',
+        desc: 'Montaj ve bakım işlemlerinde kullanılan vantuz ekipmanı.'
+      },
+      {
+        id: 17,
+        name: 'Vantuz Pedi',
+        code: 'BY-VP017',
+        category: 'Vantuz Pedi',
+        size: 'Yedek ped',
+        stock: 'Stokta',
+        image: 'vantuzpedi.jpg',
+        desc: 'Vantuz ekipmanları için değiştirilebilir yedek ped.'
+      },
+      {
+        id: 18,
+        name: 'Sporcu İpi',
+        code: 'BY-SI018',
+        category: 'Sporcu İpi',
+        size: 'Standart',
+        stock: 'Stokta',
+        image: 'sporcuip.jpg',
+        desc: 'Spor gözlükleri için dayanıklı bağlantı ipi modeli.'
+      },
+      {
+        id: 19,
+        name: 'Normal Gözlük İpi',
+        code: 'BY-NI019',
+        category: 'Normal İp',
+        size: 'Standart',
+        stock: 'Stokta',
+        image: 'kurumip.jpg',
+        desc: 'Günlük kullanım için uygun gözlük ipi seçeneği.'
+      },
+      {
+        id: 20,
+        name: 'Çocuk İpi',
+        code: 'BY-CI020',
+        category: 'Çocuk İpi',
+        size: 'Çocuk',
+        stock: 'Stokta',
+        image: 'cocukipi.jpg',
+        desc: 'Çocuk gözlükleri için uygun renkli ve esnek ip modeli.'
+      },
+      {
+        id: 21,
+        name: 'Matkap Ucu Seti',
+        code: 'BY-MU021',
+        category: 'Matkap Uçları',
+        size: 'Set',
+        stock: 'Stokta',
+        image: 'matkap.jpg',
+        desc: 'Hassas optik işlemler için uygun matkap ucu seti.'
+      },
+      {
+        id: 22,
+        name: 'Vida Çantası',
+        code: 'BY-VC022',
+        category: 'Vida Çantası',
+        size: 'Organizer',
+        stock: 'Stokta',
+        image: '110000642919142.jpg',
+        desc: 'Vida ve küçük parçaların düzenli saklanması için çanta.'
+      },
+      {
+        id: 23,
+        name: 'Lens Kabı',
+        code: 'BY-LK023',
+        category: 'Lens Kabı',
+        size: 'Standart',
+        stock: 'Stokta',
+        image: 'lenskutu.jpg',
+        desc: 'Lens saklama ve taşıma için kullanıma uygun lens kabı.'
+      },
+      {
+        id: 24,
+        name: 'Isıtıcı',
+        code: 'BY-IS024',
+        category: 'Isıtıcı',
+        size: 'Masaüstü',
+        stock: 'Stokta',
+        image: 'Cf-320-1.jpg',
+        desc: 'Optik bakım ve şekillendirme işlemlerinde kullanılan ısıtıcı ekipman.'
+      },
+      {
+        id: 25,
+        name: 'Gözlük Kabı',
+        code: 'BY-GK025',
+        category: 'Gözlük Kabı',
+        size: 'Standart',
+        stock: 'Stokta',
+        image: 'kılıf.jpeg',
+        desc: 'Gözlük koruma ve sunum amaçlı sert kapaklı gözlük kabı.'
+      },
+      {
+        id: 26,
+        name: 'Faset Montaj Seti',
+        code: 'BY-FM026',
+        category: 'Faset Montaj Seti',
+        size: 'Set',
+        stock: 'Stokta',
+        image: 'fast.jpg',
+        desc: 'Faset montaj işlemleri için gerekli yardımcı ekipman seti.'
+      }
+    ];
+
+    let activeCategory = 'Tümü';
+    let searchTerm = '';
+    let sortType = 'default';
+
+    function getCategories() {
+      return ['Tümü', ...new Set(products.map(product => product.category))];
+    }
+
+    function buildWhatsAppUrl(product) {
+      const message = `Merhaba, BYATES Optik sitesinden bir ürün için sipariş vermek istiyorum.%0A%0AÜrün Adı: ${product.name}%0AÜrün Kodu: ${product.code}%0AKategori: ${product.category}%0AÖlçü / Tip: ${product.size}%0AStok Durumu: ${product.stock}%0A%0ALütfen fiyat ve sipariş detaylarını paylaşır mısınız?`;
+      return `https://wa.me/${whatsappNumber}?text=${message}`;
+    }
+
+    function renderCategoryChips() {
+      const chipsContainer = $('#categoryChips');
+      chipsContainer.empty();
+
+      getCategories().forEach(category => {
+        chipsContainer.append(`
+          <button class="chip-btn ${activeCategory === category ? 'active' : ''}" data-category="${category}">${category}</button>
+        `);
+      });
+    }
+
+    function filterProducts() {
+      let filtered = [...products];
+
+      if (activeCategory !== 'Tümü') {
+        filtered = filtered.filter(product => product.category === activeCategory);
+      }
+
+      if (searchTerm.trim()) {
+        const term = searchTerm.toLowerCase();
+        filtered = filtered.filter(product =>
+          product.name.toLowerCase().includes(term) ||
+          product.code.toLowerCase().includes(term) ||
+          product.category.toLowerCase().includes(term) ||
+          product.desc.toLowerCase().includes(term)
+        );
+      }
+
+      if (sortType === 'name-asc') {
+        filtered.sort((a, b) => a.name.localeCompare(b.name, 'tr'));
+      } else if (sortType === 'name-desc') {
+        filtered.sort((a, b) => b.name.localeCompare(a.name, 'tr'));
+      } else if (sortType === 'category') {
+        filtered.sort((a, b) => a.category.localeCompare(b.category, 'tr'));
+      }
+
+      return filtered;
+    }
+
+    function renderProducts() {
+      const grid = $('#productGrid');
+      const emptyState = $('#emptyState');
+      const filtered = filterProducts();
+      grid.empty();
+
+      if (!filtered.length) {
+        emptyState.show();
+        return;
+      }
+
+      emptyState.hide();
+
+      filtered.forEach(product => {
+        const card = `
+          <article class="product-card" data-category="${product.category}">
+            <div class="product-image">
+              <span class="product-badge">${product.category}</span>
+              <img src="${product.image}" alt="${product.name}" loading="lazy" />
+            </div>
+            <div class="product-body">
+              <h3 class="product-title">${product.name}</h3>
+              <p class="product-desc">${product.desc}</p>
+              <ul class="meta-list">
+                <li><span>Ürün Kodu</span><strong>${product.code}</strong></li>
+                <li><span>Ölçü / Tip</span><strong>${product.size}</strong></li>
+                <li><span>Stok</span><strong>${product.stock}</strong></li>
+              </ul>
+              <div class="product-actions">
+                <a href="${buildWhatsAppUrl(product)}" target="_blank" class="btn btn-whatsapp">
+                  <i class="fa-brands fa-whatsapp me-2"></i>Sipariş Ver
+                </a>
+              </div>
+            </div>
+          </article>
+        `;
+        grid.append(card);
+      });
+    }
+
+    $(document).ready(function () {
+      renderCategoryChips();
+      renderProducts();
+
+      $(document).on('click', '.chip-btn', function () {
+        activeCategory = $(this).data('category');
+        renderCategoryChips();
+        renderProducts();
+      });
+
+      $('#searchInput').on('input', function () {
+        searchTerm = $(this).val();
+        renderProducts();
+      });
+
+      $('#sortSelect').on('change', function () {
+        sortType = $(this).val();
+        renderProducts();
+      });
+
+      $('#resetFilters').on('click', function () {
+        activeCategory = 'Tümü';
+        searchTerm = '';
+        sortType = 'default';
+        $('#searchInput').val('');
+        $('#sortSelect').val('default');
+        renderCategoryChips();
+        renderProducts();
+      });
+
+      $('.nav-link').on('click', function () {
+        $('.nav-link').removeClass('active');
+        $(this).addClass('active');
+
+        const navbarCollapse = document.getElementById('mainNav');
+        if (window.innerWidth < 992 && navbarCollapse.classList.contains('show')) {
+          const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse) || new bootstrap.Collapse(navbarCollapse, { toggle: false });
+          bsCollapse.hide();
+        }
+      });
+
+      $(document).on('click', function (e) {
+        const navbarCollapse = document.getElementById('mainNav');
+        const isClickInsideMenu = $(e.target).closest('.navbar-collapse, .navbar-toggler').length;
+
+        if (window.innerWidth < 992 && navbarCollapse.classList.contains('show') && !isClickInsideMenu) {
+          const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse) || new bootstrap.Collapse(navbarCollapse, { toggle: false });
+          bsCollapse.hide();
+        }
+      });
+    });
+  </script>
+</body>
+</html>
